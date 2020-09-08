@@ -10,6 +10,10 @@ namespace DbEngine.helper
     public class QueryHelper
     {
         #region GetRoot()
+        /// <summary>
+        /// Method to get the root directory of the project
+        /// </summary>
+        /// <returns>Root directory</returns>
         public static string GetRoot()
         {
             var mydirectory = Environment.CurrentDirectory;
@@ -61,10 +65,16 @@ namespace DbEngine.helper
                 queryString = queryString.Split(' ').FirstOrDefault(part => part.EndsWith(".csv"));
                 if (!string.IsNullOrEmpty(queryString))
                 {
+                    /*
+                     ****Commenting this as appending root path made test cases in hobbes fail
+                     ***Whereas for getting values by reading input from user either user will have to enter full
+                     *** directory path or we have to add root like this.
+                     
                     //if (Common.GetStringIndex(queryString, GetRoot()) < 0 && withDirectory)
                     //{
                     //    queryString = GetRoot() + queryString;
                     //}
+                    */
                     return queryString;
                 }
             }
