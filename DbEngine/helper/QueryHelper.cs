@@ -61,10 +61,10 @@ namespace DbEngine.helper
                 queryString = queryString.Split(' ').FirstOrDefault(part => part.EndsWith(".csv"));
                 if (!string.IsNullOrEmpty(queryString))
                 {
-                    if (Common.GetStringIndex(queryString, GetRoot()) < 0 && withDirectory)
-                    {
-                        queryString = GetRoot() + queryString;
-                    }
+                    //if (Common.GetStringIndex(queryString, GetRoot()) < 0 && withDirectory)
+                    //{
+                    //    queryString = GetRoot() + queryString;
+                    //}
                     return queryString;
                 }
             }
