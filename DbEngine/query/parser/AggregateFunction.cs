@@ -1,13 +1,33 @@
 namespace DbEngine.Query.Parser
 {
-    /* This class is used for storing name of field, aggregate function for 
-    each aggregate function generate properties for this class, Also override toString method
-   */
+    /// <summary>
+    /// This class contains the field and function name of aggregate function
+    /// </summary>
     public class AggregateFunction
     {
-        // Write logic for constructor
+        #region Properties
+        /// <summary>
+        /// Field on which aggregate function will be performed
+        /// </summary>
+        public string field;
+
+        /// <summary>
+        /// The name of the aggregate function used
+        /// </summary>
+        public string function;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Parametrised constructor for initializing field and function names
+        /// </summary>
+        /// <param name="field">Field name</param>
+        /// <param name="function">Function name</param>
         public AggregateFunction(string field, string function)
         {
-        }
+            this.field = field;
+            this.function = function;
+        } 
+        #endregion
     }
 }

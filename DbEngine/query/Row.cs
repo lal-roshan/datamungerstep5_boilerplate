@@ -1,7 +1,31 @@
-﻿namespace DbEngine.Query
+﻿#region Namespace
+namespace DbEngine.Query
 {
-    //This class represents a single data row. It should contain a string array named as RowValues to hold all the values in a row. Use constructor to initialize the property.
+    #region Class
+    /// <summary>
+    /// Class containing the data in a singe row
+    /// </summary>
     public class Row
     {
-    }
+        #region Properties
+        /// <summary>
+        /// Values representing a single data row
+        /// </summary>
+        public string[] RowValues { get; set; }
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Parametrised constructor for initialising the row values property
+        /// </summary>
+        /// <param name="rowValues"></param>
+        public Row(string[] rowValues)
+        {
+            this.RowValues = rowValues;
+        } 
+        #endregion
+    } 
+    #endregion
 }
+
+#endregion

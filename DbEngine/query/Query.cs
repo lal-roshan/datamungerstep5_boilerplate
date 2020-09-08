@@ -1,42 +1,57 @@
-﻿using DbEngine.Query.Parser;
+﻿#region Usings
+using DbEngine.helper;
+using DbEngine.Query.Parser;
 using DbEngine.Reader;
-using DbEngine.Query;
+#endregion
 
+#region Namespace
 namespace DbEngine.Query
 {
+    #region Class
+    /// <summary>
+    /// Class that executes the query and return the resulting dataset
+    /// </summary>
     public class Query
     {
-        QueryParser queryParser =null;
-        QueryParameter queryParameter=null;
+        #region  Properties
+        /// <summary>
+        /// Query parser object for parsing and populating properties of query
+        /// </summary>
+        QueryParser queryParser = null;
 
-        /*
-	 * This method will: 
-	 * 1.parse the query and populate the QueryParameter object
-	 * 2.Based on the type of query, it will select the appropriate Query processor.
-	 * 
-	 * In this example, we are going to work with only one Query Processor which is
-	 * CsvQueryProcessor, which can work with select queries containing zero, one or
-	 * multiple conditions
-	 */
+        /// <summary>
+        /// Query parameter object for saving the properties of query
+        /// </summary>
+        QueryParameter queryParameter = null;
+        #endregion
 
+        #region Public methods
+        /// <summary>
+        /// Method to execute the query and return the resulting dataset
+        /// </summary>
+        /// <param name="queryString">The input query</param>
+        /// <returns>Returns the resultant dataset if any or null</returns>
         public DataSet executeQuery(string queryString)
         {
-            /* instantiate QueryParser class */
+            if (Common.IsValidQueryBasic(queryString))
+            {
+                queryParser = new QueryParser();
+                queryParameter = queryParser.ParseQuery(queryString);
+                CsvQueryProcessor queryProcessor = new CsvQueryProcessor(queryParameter.File);
 
-            /* call parseQuery() method of the class by passing the queryString which will return object of QueryParameter
-             */
-
-
-            /*
-             * Check for Type of Query based on the QueryParameter object. In this assignment, we will process only queries containing zero, one or multiple where conditions i.e. conditions without aggregate functions, order by clause or group by clause
-             */
-
-
-
-            /*
-             call the GetDataRow() method of CsvQueryProcessor class by passing the QueryParameter Object to it. This method is supposed to return DataSet
-             */
+                if (queryProcessor != null)
+                {
+                    if (string.Equals(queryParameter.QueryType, "SIMPLE_QUERY"))
+                    {
+                        return queryProcessor.GetDataRow(queryParameter);
+                    }
+                }
+            }
             return null;
-        }
-    }
+        } 
+        #endregion
+    } 
+    #endregion
 }
+
+#endregion

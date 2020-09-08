@@ -6,9 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="query\parser\" />
     <Folder Include="writer\" />
     <Folder Include="reader\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
 </Project>
