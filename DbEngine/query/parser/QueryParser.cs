@@ -1,13 +1,10 @@
-#region Usings
-using System.Linq;
-using System.Collections.Generic;
+using DbEngine.exceptions;
 using DbEngine.helper;
-#endregion
+using System.Collections.Generic;
+using System.Linq;
 
-#region Namespace
 namespace DbEngine.Query.Parser
 {
-    #region Class
     /// <summary>
     /// Class containing logic to parse and fetch different properties of the input query
     /// </summary>
@@ -49,6 +46,11 @@ namespace DbEngine.Query.Parser
             queryParameter.Fields = GetFields();
             queryParameter.Restrictions = GetRestrictions();
             queryParameter.LogicalOperators = GetLogicalOperators();
+            if(queryParameter.Restrictions != null && queryParameter.LogicalOperators != null &&
+                queryParameter.Restrictions.Count <= queryParameter.LogicalOperators.Count)
+            {
+                throw new InvalidQueryException("Invalid usage of logical operators");
+            }
             queryParameter.AggregateFunctions = GetAggregateFunctions();
             queryParameter.GroupByFields = GetGroupByFields();
             queryParameter.OrderByFields = GetOrderByFields();
@@ -214,7 +216,5 @@ namespace DbEngine.Query.Parser
         } 
         #endregion
 
-    } 
-    #endregion
-} 
-#endregion
+    }
+}

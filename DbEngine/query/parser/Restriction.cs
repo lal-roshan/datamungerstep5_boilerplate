@@ -1,7 +1,6 @@
-#region Namespace
+
 namespace DbEngine.Query.Parser
 {
-    #region Class
     /// <summary>
     /// Class representing a condition in the query
     /// </summary>
@@ -39,6 +38,4 @@ namespace DbEngine.Query.Parser
         }
         #endregion
     }
-    #endregion
-} 
-#endregion
+}

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
 
 namespace DbEngine.helper
-{
-    #region Class
-    public class QueryHelper
+{    public class QueryHelper
     {
         #region GetRoot()
         /// <summary>
@@ -328,7 +326,7 @@ namespace DbEngine.helper
             {
                 ///Split the filter part of the query with 'and' and 'or' keywords and
                 ///remove those keywords from resultant list
-                queryResult = Common.SplitByString(queryFilter, "and, or, not",
+                queryResult = Common.SplitByString(queryFilter, "and, or",
                               Common.SplitType.RemoveThis);
 
                 ///checking whether the conditions in filter part are valid
@@ -589,5 +587,4 @@ namespace DbEngine.helper
         }
         #endregion
     }
-    #endregion
 }

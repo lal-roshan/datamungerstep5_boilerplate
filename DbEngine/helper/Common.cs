@@ -228,6 +228,25 @@ namespace DbEngine.helper
         }
 
         /// <summary>
+        /// Get the index of an item from a list
+        /// </summary>
+        /// <param name="item">item to be found</param>
+        /// <param name="items">list of items</param>
+        /// <returns>Returns index of the item if found else -1</returns>
+        public static int GetIndexFromList<T>(T item, List<T> items)
+        {
+            if(typeof(T) == typeof(string))
+            {
+                return items.FindIndex(i => string.Equals(i.ToString(), item.ToString()
+                    , StringComparison.InvariantCultureIgnoreCase));
+            }
+            else
+            {
+                return items.FindIndex(i => i.Equals(item));
+            }
+        }
+
+        /// <summary>
         /// Method to find the first or last index of a substring in a string
         /// </summary>
         /// <param name="source">String in which substring is to be searched</param>

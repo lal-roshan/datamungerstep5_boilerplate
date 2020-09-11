@@ -1,15 +1,12 @@
-﻿#region Usings
+﻿using DbEngine.helper;
 using DbEngine.Query.Parser;
 using DbEngine.Reader;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#endregion
 
-#region Namespace
 namespace DbEngine.Query
 {
-    #region Class
     /// <summary>
     /// Class containing methods to evaluating expressions in the query
     /// </summary>
@@ -272,6 +269,36 @@ namespace DbEngine.Query
                     return false;
             }
         }
+
+        /// <summary>
+        /// Method to perform all occurences of a logical operator in the filter part
+        /// </summary>
+        /// <param name="operation">The logical operation</param>
+        /// <param name="conditions">The conditions for operation to operate on</param>
+        /// <param name="operators">The list of all operators in filter</param>
+        private static void PerformSpecificLogicalOperations(string operation, List<bool> conditions, List<string> operators)
+        {
+            int logicalIndex = Common.GetIndexFromList(operation, operators);
+            while (logicalIndex > -1)
+            {
+                conditions[logicalIndex] = PerformLogicalOperation(conditions[logicalIndex],
+                    conditions[logicalIndex + 1], operation);
+                conditions.RemoveAt(logicalIndex + 1);
+                operators.RemoveAt(logicalIndex);
+                logicalIndex = Common.GetIndexFromList(operation, operators);
+            }
+        }
+
+        /// <summary>
+        /// Method 
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="logicalOperators"></param>
+        /// <returns></returns>
+        private static int FindLogicalOperatorIndex(string operation, List<string> logicalOperators)
+        {
+            return logicalOperators.FindIndex(l => string.Equals(l, operation, StringComparison.InvariantCultureIgnoreCase));
+        }
         #endregion
 
         #region Public Methods
@@ -285,6 +312,7 @@ namespace DbEngine.Query
         {
             ///If the file name is different than previous file name then recalculate all the properties related to it
             if (!string.Equals(_file, queryParameter.File))
+        
             {
                 _file = queryParameter.File;
                 _queryProcessor = new CsvQueryProcessor(queryParameter.File);
@@ -311,46 +339,18 @@ namespace DbEngine.Query
             ///After finding the result of each condition logical operators should be applied if any
             if (queryParameter.LogicalOperators != null)
             {
-                int wasNot;
-                for (int i = 0; i < queryParameter.LogicalOperators.Count; i++)
-                {
-                    wasNot = 0;
+                List<string> logicalOperators = queryParameter.LogicalOperators.ToList();
+                ///Execute all and conditions first due to priority
+                PerformSpecificLogicalOperations("and", conditions, logicalOperators);
 
-                    ///If the current operator is "NOT" we only have to apply the logic to a single condition result
-                    ///Eg: NOT city = 'Bangalore'
-                    if (string.Equals(queryParameter.LogicalOperators[i], "NOT",
-                        StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        conditions[i] = PerformLogicalOperation(conditions[i],
-                            null, queryParameter.LogicalOperators[i]);
-                    }
-                    ///If the current opertor is not "NOT" then we have to apply logic to two condition results
-                    ///Eg: id > 5 AND city = 'Bangalore'
-                    else
-                    {
-                        ///If the next operator is "NOT" we have to make sure that the second condition result is negated
-                        ///before applying logic of "AND" or "OR" operators
-                        if (((i + 1) < queryParameter.LogicalOperators.Count) &&
-                            (string.Equals(queryParameter.LogicalOperators[i + 1], "NOT",
-                            StringComparison.InvariantCultureIgnoreCase)))
-                        {
-                            conditions[i + 1] = PerformLogicalOperation(conditions[i + 1],
-                                null, queryParameter.LogicalOperators[i + 1]);
-                            ///If "NOT" was performed then since we use next condition we have to increase an extra index 
-                            wasNot = 1;
-                        }
-                        conditions[i + 1] = PerformLogicalOperation(conditions[i], conditions[i + 1],
-                            queryParameter.LogicalOperators[i]);
-                        i += wasNot;
-                    }
-                }
+                ///Execute or conditions after and
+                PerformSpecificLogicalOperations("or", conditions, logicalOperators);
+
             }
             ///The last value in the condition bool list will be the resulting bool
             return conditions.Last();
         } 
         #endregion
 
-    } 
-    #endregion
-} 
-#endregion
+    }
+}

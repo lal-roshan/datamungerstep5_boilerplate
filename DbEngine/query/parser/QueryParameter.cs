@@ -1,12 +1,8 @@
-#region Usings
 using System;
-using System.Collections.Generic; 
-#endregion
+using System.Collections.Generic;
 
-#region Namespace
 namespace DbEngine.Query.Parser
 {
-    #region Class
     /// <summary>
     /// Class that contains different properties of a query
     /// </summary>
@@ -62,6 +58,4 @@ namespace DbEngine.Query.Parser
         /// </summary>
         public string QueryType { get; set; } = "SIMPLE_QUERY";
     }
-    #endregion
-} 
-#endregion
+}

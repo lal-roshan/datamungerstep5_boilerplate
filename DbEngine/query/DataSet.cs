@@ -1,7 +1,5 @@
-﻿#region Namespace
-namespace DbEngine.Query
+﻿namespace DbEngine.Query
 {
-    #region  Class
     /// <summary>
     /// Class representing the set of rows of data
     /// </summary>
@@ -24,8 +22,5 @@ namespace DbEngine.Query
             this.Rows = rows;
         } 
         #endregion
-    } 
-    #endregion
+    }
 }
-
-#endregion

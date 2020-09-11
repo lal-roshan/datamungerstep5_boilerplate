@@ -1,7 +1,5 @@
-#region Namespace
 namespace DbEngine.Query
 {
-    #region Class
     /// <summary>
     /// Class representing the data types of each columns
     /// </summary>
@@ -35,7 +33,5 @@ namespace DbEngine.Query
             return string.Join(", ", DataTypes);
         }
         #endregion
-    } 
-    #endregion
-} 
-#endregion
+    }
+}

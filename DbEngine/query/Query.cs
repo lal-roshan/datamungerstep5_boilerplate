@@ -1,13 +1,9 @@
-﻿#region Usings
-using DbEngine.helper;
+﻿using DbEngine.helper;
 using DbEngine.Query.Parser;
 using DbEngine.Reader;
-#endregion
 
-#region Namespace
 namespace DbEngine.Query
 {
-    #region Class
     /// <summary>
     /// Class that executes the query and return the resulting dataset
     /// </summary>
@@ -50,8 +46,5 @@ namespace DbEngine.Query
             return null;
         } 
         #endregion
-    } 
-    #endregion
+    }
 }
-
-#endregion

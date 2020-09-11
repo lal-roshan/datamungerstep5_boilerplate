@@ -1,16 +1,12 @@
-#region Usings
 using DbEngine.Query;
 using DbEngine.Query.Parser;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-#endregion
 
-#region Namespace
 namespace DbEngine.Reader
 {
-    #region Class
     /// <summary>
     /// Class containing various methods for fetching data from file
     /// </summary>
@@ -312,8 +308,5 @@ namespace DbEngine.Reader
             return null;
         }
         #endregion
-
     }
-    #endregion
 }
-#endregion

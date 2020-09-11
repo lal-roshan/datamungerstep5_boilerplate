@@ -1,7 +1,5 @@
-#region Namespace
 namespace DbEngine.Query
 {
-    #region  Class
     /// <summary>
     /// Class containing the list of column headers in the file
     /// </summary>
@@ -35,7 +33,5 @@ namespace DbEngine.Query
             return string.Join(", ", Headers);
         } 
         #endregion
-    } 
-    #endregion
-} 
-#endregion
+    }
+}

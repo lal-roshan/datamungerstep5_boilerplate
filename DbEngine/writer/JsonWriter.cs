@@ -1,13 +1,9 @@
-﻿#region Usings
-using DbEngine.Query;
+﻿using DbEngine.Query;
 using Newtonsoft.Json;
 using System.IO;
-#endregion
 
-#region Namespace
 namespace DbEngine.writer
 {
-    #region Class
     /// <summary>
     /// Class for writing the dataset into json file
     /// </summary>
@@ -46,7 +42,5 @@ namespace DbEngine.writer
             }
         } 
         #endregion
-    } 
-    #endregion
-} 
-#endregion
+    }
+}
