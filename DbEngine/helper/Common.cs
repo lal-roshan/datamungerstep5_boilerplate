@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 
 namespace DbEngine.helper
 {
-    #region Class
     public class Common
     {
         #region Constants
@@ -510,5 +509,4 @@ namespace DbEngine.helper
         }
         #endregion
     }
-    #endregion
 }

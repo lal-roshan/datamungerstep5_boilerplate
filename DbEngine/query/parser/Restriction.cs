@@ -1,4 +1,3 @@
-
 namespace DbEngine.Query.Parser
 {
     /// <summary>

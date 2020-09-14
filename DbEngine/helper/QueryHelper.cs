@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 
 namespace DbEngine.helper
-{    public class QueryHelper
+{
+    public class QueryHelper
     {
         #region GetRoot()
         /// <summary>
@@ -363,7 +364,7 @@ namespace DbEngine.helper
                 else
                 {
                     ///Splits the filter part based on operators and removes all other part
-                    queryResult = Common.SplitByString(filterPart, "and, or, not",
+                    queryResult = Common.SplitByString(filterPart, "and, or",
                                   Common.SplitType.RemoveAllButThis);
                     if (queryResult != null && queryResult.Count == 0)
                     {

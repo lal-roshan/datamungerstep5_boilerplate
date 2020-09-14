@@ -288,17 +288,6 @@ namespace DbEngine.Query
                 logicalIndex = Common.GetIndexFromList(operation, operators);
             }
         }
-
-        /// <summary>
-        /// Method 
-        /// </summary>
-        /// <param name="operation"></param>
-        /// <param name="logicalOperators"></param>
-        /// <returns></returns>
-        private static int FindLogicalOperatorIndex(string operation, List<string> logicalOperators)
-        {
-            return logicalOperators.FindIndex(l => string.Equals(l, operation, StringComparison.InvariantCultureIgnoreCase));
-        }
         #endregion
 
         #region Public Methods
